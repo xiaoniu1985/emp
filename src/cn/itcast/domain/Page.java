@@ -71,7 +71,6 @@ public class Page<T> {
 	public List<T> getBeanList() {
 		return beanList;
 	}
-
 	public void setBeanList(List<T> beanList) {
 		this.beanList = beanList;
 	}
