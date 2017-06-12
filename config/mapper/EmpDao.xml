@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.EmpDao">
+
+<sql id="insertfield">(workcode,name,sex,hirdate,salary,deptno)</sql>
+
+<sql id="selectfield">id,workcode,name,sex,hirdate,salary ,deptno</sql>
+
+<sql id="query">
+		<if test="workcode!=null and workcode!=''">and workcode like concat('%',#{workcode},'%')</if>
+		<if test="deptno!=null and deptno!=''">and deptno=#{deptno}</if>
+		<if test="name!=null and name!=''">and name like concat('%',#{name},'%')</if>
+		<if test="sex==0 or sex==1">and sex=#{sex}</if>
+		<if test="Hsalary!=null and Hsalary!=''">and salary &lt;= #{Hsalary}</if>
+		<if test="Lsalary!=null and Lsalary!=''">and salary>=#{Lsalary}</if>
+		<if test="hirdatepre!=null and hirdatepre!=''">and hirdate>=#{hirdatepre}</if>
+		<if test="hirdatenext!=null and hirdatenext!=''">and hirdate &lt;= #{hirdatenext}</if>
+		
+</sql>
+
+<select id="findEmpById" parameterType="int" resultType="cn.itcast.domain.Employee">
+  SELECT <include refid="selectfield"/> FROM emp WHERE id=#{id}
+</select>
+
+
+<select id="countEmpsByEmpQueryVo"  parameterType="cn.itcast.domain.EmpQueryVo"   resultType="int">
+    select count(*)  from emp
+	<where>
+	    <include refid="query"/>
+	</where>
+	
+</select>
+
+
+
+<select id="findEmpsByEmpQueryVo"  parameterType="cn.itcast.domain.EmpQueryVo"   resultType="cn.itcast.domain.Employee">
+select <include refid="selectfield"/> from emp
+	<where>
+		<include refid="query"/>
+	</where>
+	
+	
+	
+	<if test="pbegin>=0 and  ps>0">limit #{pbegin},#{ps}</if>
+	
+</select>
+
+
+
+<insert id="insertEmp" parameterType="cn.itcast.domain.Employee">
+insert into emp<include refid="insertfield"/> values(#{workcode},#{name},#{sex},#{hirdate},#{salary},#{deptno})
+</insert>
+
+
+<update id="updateEmp"  parameterType="cn.itcast.domain.Employee">
+update emp set  workcode=#{workcode},name=#{name},sex=#{sex},hirdate=#{hirdate},salary=#{salary},deptno=#{deptno} where id=#{id}
+</update>
+
+
+<delete id="deleteEmp"  parameterType="cn.itcast.domain.EmpQueryVo">
+	delete from emp where id in
+		<if test="ids!=null">
+			<foreach collection="ids" item="id" open="("   close=")" separator=",">
+			   #{id}
+			</foreach>
+		</if>
+</delete>
+
+
+
+</mapper>
