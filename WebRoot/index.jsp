@@ -1,5 +1,5 @@
 <% 
 request.getRequestDispatcher("/findemp").forward(request, response);
-AAAA
-BBB
+System.out.println("CCCCC");
+System.out.println("ddddddd");
 %>
