@@ -21,7 +21,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div>SSSSSSSSSSSSSSSS河北省</div>
+<div>SSSSSSSSSSSSSSSS河北省AAAAAAAAAAAA CCCCCYYY</div>
 
 <button id ="b1">点击</button>
 </body>
