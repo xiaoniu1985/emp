@@ -61,12 +61,12 @@ $("#b3").click(function(){
 	  });
 })
 }) 
-/////////////////////
+/////////////////////xiaoniu1985 
 </script>
 
 </head>
 <body>
-ffggghh
+张青 工
 <div align="center">
 <div>
 <form action="${pageContext.request.contextPath}/findemp.action" method="post">

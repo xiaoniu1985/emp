@@ -1,7 +1,7 @@
 package cn.itcast.domain;
 
 public class Department {
-	private int id;
+	private int id;//
 	private String uuid;
 	private int deptno;
 	private String name;
